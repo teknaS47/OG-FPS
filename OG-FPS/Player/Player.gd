@@ -23,6 +23,8 @@ func _input(event):
 		if camera_x_rotation+x_delta > -90 and camera_x_rotation + x_delta < 90:
 			camera.rotate_x(deg2rad(-x_delta))
 			camera_x_rotation+=x_delta
+	
+	
 
 func _physics_process(delta):
 	var head_basis = head.get_global_transform().basis
@@ -46,5 +48,11 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y += jump_power
+		
+	if Input.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		
+	if Input.is_action_pressed("fire"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 	velocity = move_and_slide(velocity,Vector3.UP)
